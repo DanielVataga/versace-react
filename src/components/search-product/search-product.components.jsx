@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import {SHOP_DATA} from '../../shop-data.jsx'
 import Card from '../card/card.component.jsx'
 
@@ -10,6 +11,13 @@ const SearchProduct = () => {
   const findProductHandler = (e) => setFindProd(e.target.value)
 
   const filteredBySearch = SHOP_DATA.filter(el => el.name.toLowerCase().includes(findProd.toLowerCase()))
+
+  let navigate = useNavigate()
+
+  const navToProd = (id) => {
+    navigate(`${id}`)
+  }
+
 
   return (
     <div className='SearchWrapper'>
@@ -28,7 +36,7 @@ const SearchProduct = () => {
       </div>
 
       <div className="foundProductWraper">
-        {filteredBySearch.map(prod => <Card product={prod} />)}
+        {filteredBySearch.map(prod => <Card product={prod} navToProd={navToProd}/>)}
       </div>
     </div>
   )

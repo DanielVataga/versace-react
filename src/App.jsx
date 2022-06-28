@@ -22,24 +22,29 @@ const App = () => {
           <Route path="women" element={<WomenClothes />}> 
             {/* <Route path=':id' element={<ProductPage />}/> */}
           </Route>
-          <Route path='women/:id' element={<ProductPage />}/>
 
 
           <Route path="men" element={<MenClothes />}>
             {/* <Route path=':id' element={<ProductPage />}/> */}
           </Route>
-          <Route path='men/:id' element={<ProductPage />}/>
 
 
           <Route path="children" element={<ChildrenClothes />}>
             {/* <Route path=':id' element={<ProductPage/>}/> */}
           </Route>
-          <Route path='children/:id' element={<ProductPage/>}/>
 
 
           <Route path="search" element={<SearchProduct />}/>
           <Route path="liked" element={<Liked />}/>
           <Route path="cart" element={<Cart />}/>
+
+          <Route path='women/:id' element={<ProductPage />}/>
+          <Route path='men/:id' element={<ProductPage />}/>
+          <Route path='children/:id' element={<ProductPage/>}/>
+          <Route path=':id' element={<ProductPage/>}/>
+          <Route path='search/:id' element={<ProductPage/>}/>
+
+
           
         </Route>
       </Routes>
