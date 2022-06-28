@@ -9,8 +9,8 @@ import Home from "./components/home-page/home.component";
 import SearchProduct from "./components/search-product/search-product.components";
 import Cart from "./components/cart/cart.component";
 import Liked from "./components/liked/liked.component";
-
-
+import ProductPage from "./components/product-page/product-page.component";
+import { SHOP_DATA } from "./shop-data";
 
 
 const App = () => {
@@ -19,12 +19,28 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Header />}>
           <Route index element={<Home />}/>
-          <Route path="women" element={<WomenClothes />}/>
-          <Route path="men" element={<MenClothes />}/>
-          <Route path="children" element={<ChildrenClothes />}/>
+          <Route path="women" element={<WomenClothes />}> 
+            {/* <Route path=':id' element={<ProductPage />}/> */}
+          </Route>
+          <Route path='women/:id' element={<ProductPage />}/>
+
+
+          <Route path="men" element={<MenClothes />}>
+            {/* <Route path=':id' element={<ProductPage />}/> */}
+          </Route>
+          <Route path='men/:id' element={<ProductPage />}/>
+
+
+          <Route path="children" element={<ChildrenClothes />}>
+            {/* <Route path=':id' element={<ProductPage/>}/> */}
+          </Route>
+          <Route path='children/:id' element={<ProductPage/>}/>
+
+
           <Route path="search" element={<SearchProduct />}/>
           <Route path="liked" element={<Liked />}/>
           <Route path="cart" element={<Cart />}/>
+          
         </Route>
       </Routes>
     </div>

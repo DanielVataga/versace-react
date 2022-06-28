@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import {SHOP_DATA} from '../../shop-data.jsx'
 import Card from '../card/card.component.jsx'
 
-
 import './search-product.styles.scss'
 
 const SearchProduct = () => {
