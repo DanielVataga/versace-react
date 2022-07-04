@@ -1,8 +1,10 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useContext} from "react";
 import { ReactComponent as LogoSvg } from "../../assets/svg/logo.svg";
 import { ReactComponent as SearchSvg } from "../../assets/svg/search.svg";
 import { ReactComponent as LikedSvg } from "../../assets/svg/liked.svg";
 import { ReactComponent as CartSvg } from "../../assets/svg/cart.svg";
+import { CartContext } from "../../contexts/cart.context";
+
 
 import {
   HeaderWrapper,
@@ -14,9 +16,11 @@ import {
   SvgLinkWrapper
 } from "./header.styles.jsx";
 
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 const Header = () => {
+  const {cart} = useContext(CartContext)
+  
   return (
     <Fragment>
       <HeaderWrapper>
@@ -43,7 +47,7 @@ const Header = () => {
             <CartSvg  />
           </SvgLinkWrapper>
 
-          <CartQuantity>0</CartQuantity>
+          <CartQuantity>{cart.length}</CartQuantity>
         </NavIcons>
       </HeaderWrapper>
       <Outlet />

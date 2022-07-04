@@ -1,15 +1,20 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { CartContext } from "../../contexts/cart.context";
 import { SHOP_DATA } from "../../shop-data";
 
 import "./product-page.styles.scss";
 
 const ProductPage = () => {
   const SizesGuide = [37, 38, 39, 40, 41, 42, 43];
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const product = SHOP_DATA.find((el) => id == el.id);
 
+  const { cart, addProductToCart, getSize } = useContext(CartContext);
+  
   return (
     <div className="ProductPageWrapper">
       <div className="ProductImageWrapper">
@@ -27,18 +32,27 @@ const ProductPage = () => {
           </div>
 
           <div className="ProductDescription">
-            <p>
-              {product.description}
-            </p>
+            <p>{product.description}</p>
           </div>
 
           <ul className="SizesGuide">
-            {SizesGuide.map((size) => (
-              <li>{size}</li>
+            {SizesGuide.map((size, i) => (
+              <li key={i} onClick={() => getSize(size)} >{size}</li>
             ))}
           </ul>
 
-          <button className="AddToBag">Add To Bag</button>
+          {!cart.find((el) => el.id == id) ? (
+            <button
+              className="AddToBag"
+              onClick={() => addProductToCart(product)}
+            >
+              Add To Bag
+            </button>
+          ) : (
+            <button className="CheckBag" onClick={() => navigate("/cart")}>
+              To Cart
+            </button>
+          )}
         </div>
       </div>
     </div>

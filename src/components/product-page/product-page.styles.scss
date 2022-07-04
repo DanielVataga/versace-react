@@ -66,15 +66,19 @@
           line-height: 150%;
           color: rgba(0, 0, 0, 0.5);
           cursor: pointer;
-          transition: .3s ease;
+          transition: 0.3s ease;
 
           &:hover {
             color: #000;
+            text-decoration: underline;
+
           }
         }
+
       }
 
-      .AddToBag {
+      .AddToBag,
+      .CheckBag {
         width: 100%;
         padding: 15px 0;
       }
