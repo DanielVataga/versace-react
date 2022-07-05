@@ -14,9 +14,11 @@ const ProductPage = () => {
   const product = SHOP_DATA.find((el) => id == el.id);
 
   const { cart, addProductToCart, getSize } = useContext(CartContext);
+  // const cart = state.cart
   
   return (
     <div className="ProductPageWrapper">
+      <div className="ProductPageContainer">
       <div className="ProductImageWrapper">
         <img src={product.image} alt={product.name} />
       </div>
@@ -40,7 +42,7 @@ const ProductPage = () => {
               <li key={i} onClick={() => getSize(size)} >{size}</li>
             ))}
           </ul>
-
+          
           {!cart.find((el) => el.id == id) ? (
             <button
               className="AddToBag"
@@ -54,6 +56,7 @@ const ProductPage = () => {
             </button>
           )}
         </div>
+      </div>
       </div>
     </div>
   );

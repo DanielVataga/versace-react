@@ -7,10 +7,10 @@ const CartItem = ({ cartElement }) => {
   const { id, name, image, price } = cartElement;
   const { 
     removeProductFromCart, 
-    cart,
     addQty,
     removeQty,
-    size
+    // size,
+    cart
   } = useContext(CartContext);
 
   const removeQtyHandler = () => removeQty(id)
@@ -41,9 +41,9 @@ const CartItem = ({ cartElement }) => {
           <div className="CartItemContentFooter">
             <div className="SizeContainer">
               <span>Size: {currentProduct.size}</span>
+
               <div className="QuantityContainer">
                 <span>Qty: {currentProduct.quantity}</span>
-
                 <div className="ChangeQtycontainer">
                   <button className="decrement" onClick={removeQtyHandler}>&#60;</button>
                   <div className="number">{currentProduct.quantity}</div>

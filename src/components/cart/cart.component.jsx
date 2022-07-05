@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const { cart, summaryPrice } = useContext(CartContext);
   const navigate = useNavigate()
+  // const cart = state.cart
 
   return (
     <div className="CartWrapper">

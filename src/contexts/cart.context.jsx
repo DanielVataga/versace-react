@@ -1,54 +1,81 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer } from "react";
 
 export const CartContext = createContext();
 
+const TYPES = {
+  SET_TO_CART: "SET_TO_CART",
+  SET_SIZE: "SET_SIZE",
+  SET_REMOVE_ITEM: "SET_REMOVE_ITEM",
+  SET_ADD_QTY: "SET_ADD_QTY",
+  SET_DECREASE_QTY: "SET_DECREASE_QTY",
+};
+
+const initialState = {
+  cart: [],
+  size: 37,
+};
+
+const reducer = (state, action) => {
+  const { type, payload } = action;
+  const { cart, size } = state;
+
+  switch (type) {
+    case TYPES.SET_TO_CART:
+      return { ...state, cart: [...cart, {...payload, size: size}] };
+    case TYPES.SET_SIZE:
+      return { ...state, size: +payload };
+    case TYPES.SET_REMOVE_ITEM:
+      return { ...state, cart: cart.filter((item) => item.id !== payload) };
+    case TYPES.SET_ADD_QTY:
+      return { ...state };
+    case TYPES.SET_DECREASE_QTY:
+      return { ...state };
+    default:
+      throw new Error(`Unhandled type ${type}`);
+  }
+};
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
-  const [qty, setProductQty] = useState(0);
-  const [size, setSize] = useState(37);
+  const [{ cart, size }, dispatch] = useReducer(reducer, initialState);
 
-  const addProductToCart = (product) => setCart([...cart, {...product, size: size}]);
+  const addProductToCart = (product) =>
+    dispatch({ type: TYPES.SET_TO_CART, payload: product });
 
-  const getSize = (size) => setSize(size)
-
+  const getSize = (size) => dispatch({ type: TYPES.SET_SIZE, payload: size });
+  console.log(size);
 
   const removeProductFromCart = (id) => {
-    let newCart = cart.filter((item) => item.id !== id);
-    setCart(newCart);
+    dispatch({ type: TYPES.SET_REMOVE_ITEM, payload: id });
   };
 
   const addQty = (id) => {
-    let added = cart.find(el => el.id === id).quantity++
-    setProductQty(added)
-  }
+    cart.find((el) => el.id === id).quantity++;
+    dispatch({ type: TYPES.SET_ADD_QTY });
+  };
 
   const removeQty = (id) => {
-    let added = cart.find(el => el.id === id).quantity--
-    if(added === 1) {
-      let newCart = cart.filter((item) => item.id !== id);
-      setCart(newCart);
+    const prod = cart.find((el) => el.id === id);
+    prod.quantity--;
+    if (prod.quantity === 0) {
+      cart.filter((item) => item.id !== id);
+      dispatch({ type: TYPES.SET_REMOVE_ITEM, payload: id });
+    } else {
+      dispatch({ type: TYPES.SET_DECREASE_QTY });
     }
-    else {setProductQty(added)}
-  }
-
-  
-
-  console.log(cart);
+  };
 
   const summaryPrice = cart.reduce( function (acc, obj) { return acc + obj.price * obj.quantity; }, 0 )
 
   return (
     <CartContext.Provider
-      value={{ 
-        cart, 
-        addProductToCart, 
-        removeProductFromCart, 
-        summaryPrice, 
-        setProductQty, 
+      value={{
+        cart,
+        addProductToCart,
+        removeProductFromCart,
+        summaryPrice,
         addQty,
         removeQty,
         getSize,
-        size
       }}
     >
       {children}
