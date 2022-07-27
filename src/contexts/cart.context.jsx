@@ -42,7 +42,6 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: TYPES.SET_TO_CART, payload: product });
 
   const getSize = (size) => dispatch({ type: TYPES.SET_SIZE, payload: size });
-  console.log(size);
 
   const removeProductFromCart = (id) => {
     dispatch({ type: TYPES.SET_REMOVE_ITEM, payload: id });

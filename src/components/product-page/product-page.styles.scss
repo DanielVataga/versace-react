@@ -79,11 +79,29 @@
           }
         }
 
-        .AddToBag,
-        .CheckBag {
-          width: 100%;
-          padding: 15px 0;
+        .ButtonsContainer {
+          display: flex;
+          flex-direction: column;
+
+          .AddToBag,
+          .CheckBag {
+            width: 100%;
+            padding: 15px 0;
+          }
+
+          .likedContainer {
+            width: 36px;
+            height: 31px;
+            margin-top: 30px;
+
+            .LikedSvg {
+              width: 100%;
+              height: 100%;
+              cursor: pointer;
+            }
+          }
         }
+        
       }
     }
   }

@@ -5,14 +5,18 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { CartProvider } from './contexts/cart.context';
+import { LikedProvider } from './contexts/liked.context';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <CartProvider>
-        <App />
-      </CartProvider>
+      <LikedProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </LikedProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

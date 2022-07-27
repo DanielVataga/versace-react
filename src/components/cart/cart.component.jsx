@@ -8,7 +8,7 @@ const Cart = () => {
   const { cart, summaryPrice } = useContext(CartContext);
   const navigate = useNavigate()
   // const cart = state.cart
-
+  console.log(cart);
   return (
     <div className="CartWrapper">
       <div className="CartItemsWrapper">
